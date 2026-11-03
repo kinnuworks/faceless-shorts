@@ -1,0 +1,52 @@
+[
+ {
+  "file": "sfx/zip_fast.mp3",
+  "t": 0.0,
+  "gain_db": -8
+ },
+ {
+  "file": "sfx/whoosh.mp3",
+  "t": 3.1,
+  "gain_db": -14
+ },
+ {
+  "file": "sfx/click.mp3",
+  "t": 10.16,
+  "gain_db": -12
+ },
+ {
+  "file": "sfx/scan.mp3",
+  "t": 13.76,
+  "gain_db": -13
+ },
+ {
+  "file": "sfx/zip_slow_up.mp3",
+  "t": 17.44,
+  "gain_db": -12
+ },
+ {
+  "file": "sfx/click.mp3",
+  "t": 22,
+  "gain_db": -9
+ },
+ {
+  "file": "sfx/zip_slow_down.mp3",
+  "t": 24.08,
+  "gain_db": -12
+ },
+ {
+  "file": "sfx/whoosh.mp3",
+  "t": 31.05,
+  "gain_db": -16
+ },
+ {
+  "file": "sfx/stomp.mp3",
+  "t": 36.36,
+  "gain_db": -11
+ },
+ {
+  "file": "sfx/zip_fast.mp3",
+  "t": 40.230000000000004,
+  "gain_db": -5
+ }
+]

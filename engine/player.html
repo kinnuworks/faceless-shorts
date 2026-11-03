@@ -1,0 +1,66 @@
+<!doctype html>
+<meta charset="utf-8">
+<style>
+@font-face { font-family: Fredoka; src: url(fonts/fredoka-700.woff2) format('woff2'); font-weight: 600 700; }
+/* caption face: Verdana Bold where installed, DejaVu Sans Bold (bundled, free licence) everywhere else */
+@font-face { font-family: Cap; src: local('Verdana Bold'), local('Verdana-Bold'), url(fonts/DejaVuSans-Bold.ttf); font-weight: 700; }
+html, body { margin: 0; background: #000; }
+canvas { display: block; width: 360px; height: 640px; }
+body.full canvas { width: 1080px; height: 1920px; }
+</style>
+<canvas id="c" width="1080" height="1920"></canvas>
+<script type="importmap">{ "imports": { "three": "../node_modules/three/build/three.module.js", "three/addons/": "../node_modules/three/examples/jsm/" } }</script>
+<script type="module">
+// Loads one Short (?short=<slug>) and exposes seek(t) for the renderer.
+// Open it directly in a browser to preview: it plays in real time with the voice.
+import * as kit from './kit.js';
+
+const slug = new URLSearchParams(location.search).get('short');
+const base = `../shorts/${slug}/`;
+const c = document.getElementById('c'), g = c.getContext('2d');
+const acc = new OffscreenCanvas(kit.W, kit.H), ag = acc.getContext('2d');
+
+const words = await (await fetch(base + 'words.json')).json();
+const clock = kit.wordClock(words);
+const mod = await import(base + 'scene.js');
+await Promise.all([document.fonts.load('700 92px Fredoka'), document.fonts.load('700 76px Cap')]);
+
+// a scene is either a plain draw function (2D), or exports create() that builds its 3D world once
+// and returns the draw function. Either way, drawing frame t must not depend on earlier frames.
+const scene = mod.create ? await mod.create({ kit, clock, THREE: await import('three') }) : mod.default;
+scene.tail ??= mod.default?.tail;
+const draw = (ctx, t) => { ctx.setTransform(1, 0, 0, 1, 0, 0); scene(ctx, t, clock, kit); };
+const duration = (scene.tail ?? 1.2) + clock.duration;
+
+window.duration = duration;
+window.subframes = scene.subframes ?? 2;
+scene.tail ??= 1.2;   // pre-rendered frame scenes bring their own motion blur
+window.seek = t => draw(g, t);
+
+// motion blur: average `sub` subframes spread over `shutter` of one frame
+window.frameJPEG = async (t, sub = 2, shutter = .6) => {
+  if (scene.prepare) await scene.prepare(t);
+  if (sub <= 1) draw(g, t);
+  else {
+    ag.globalAlpha = 1; ag.clearRect(0, 0, kit.W, kit.H);
+    for (let k = 0; k < sub; k++) {
+      draw(g, t + (k / (sub - 1) - .5) * shutter / kit.FPS);
+      ag.globalAlpha = 1 / (k + 1); ag.drawImage(c, 0, 0);
+    }
+    g.setTransform(1, 0, 0, 1, 0, 0); g.drawImage(acc, 0, 0);
+  }
+  const blob = await c.convertToBlob?.({ type: 'image/jpeg', quality: .95 })
+    ?? await new Promise(r => c.toBlob(r, 'image/jpeg', .95));
+  const buf = new Uint8Array(await blob.arrayBuffer());
+  let s = ''; for (let i = 0; i < buf.length; i += 0x8000) s += String.fromCharCode(...buf.subarray(i, i + 0x8000));
+  return btoa(s);
+};
+window.ready = true;
+
+if (!navigator.webdriver) {
+  const audio = new Audio(base + 'voice.mp3');
+  document.body.onclick = () => { audio.currentTime = 0; audio.play(); };
+  const loop = () => { window.seek(audio.paused ? 0 : audio.currentTime); requestAnimationFrame(loop); };
+  loop();
+}
+</script>

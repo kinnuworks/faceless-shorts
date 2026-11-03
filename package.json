@@ -1,0 +1,17 @@
+{
+  "name": "faceless-shorts",
+  "version": "0.2.0",
+  "private": true,
+  "type": "module",
+  "description": "Code Kinnu skill: one sentence in, a finished faceless Short out.",
+  "license": "MIT",
+  "scripts": {
+    "voice": "node scripts/voice.mjs",
+    "contact": "node scripts/contact.mjs",
+    "render": "node scripts/render.mjs"
+  },
+  "dependencies": {
+    "playwright": "1.56.1",
+    "three": "0.170.0"
+  }
+}

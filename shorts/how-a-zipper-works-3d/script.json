@@ -1,0 +1,12 @@
+{
+  "title": "How a Zipper Actually Works",
+  "voice_id": "UgBBYS2sOqTuMpoF3BR0",
+  "model_id": "eleven_v4",
+  "speed": 1.08,
+  "text": "[American accent] Every zipper tooth has a bump on top and a hollow underneath. But two rows of teeth can't grab each other on their own. The angle is wrong. That's the slider's job. Inside, there's a Y-shaped channel. Pull it up, and the Y squeezes both rows into one, tilting each tooth just enough that its bump drops into the next tooth's hollow. Pull it down, and the same channel pries them apart again. This design went on sale in 1913. Ten years later, a rubber boot company named it after the sound it makes. Zip. And every single tooth? Still the same bump, and the same hollow.",
+  "sources": [
+    "https://en.wikipedia.org/wiki/Zipper (tooth projection and recess, Y-shaped slider channel, 1913 sale, B.F. Goodrich 1923 naming)",
+    "https://www.scientificamerican.com/blog/observations/google-pays-homage-to-zipper-engineer-gideon-sundback/"
+  ],
+  "voice_name": "Mark - Natural Conversations (ElevenLabs library)"
+}

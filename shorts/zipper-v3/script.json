@@ -1,0 +1,13 @@
+{
+  "title": "How a Zipper Actually Works",
+  "model_id": "eleven_v4",
+  "speed": 1.05,
+  "text": "This sound is one of the oldest tricks in your closet. Zoom in, and every tooth has a bump on top and a hollow underneath. Push two rows together by hand, and they just slide apart. The angle is wrong. The secret is inside the slider. A Y-shaped channel. Pull up, and it squeezes both rows into one, tilting each tooth until its bump drops into the next one's hollow. Pull down, and the same Y pries them apart. Now check your own zipper. There's a good chance it says YKK. One Japanese company makes a huge share of the world's zippers. And the name? A rubber boot company, in 1923, named it after the sound. Zip.",
+  "sources": [
+    "https://en.wikipedia.org/wiki/Zipper (tooth projection and recess; Y-shaped slider channel; B. F. Goodrich named it 'zipper' on rubber galoshes in 1923)",
+    "https://en.wikipedia.org/wiki/YKK (about 45% global share)",
+    "https://theconversation.com/hot-competition-for-the-humble-zipper-113800 (40% by value, 20% by volume)"
+  ],
+  "voice_id": "UgBBYS2sOqTuMpoF3BR0",
+  "voice_name": "Mark - Natural Conversations (Shorts narrator)"
+}
